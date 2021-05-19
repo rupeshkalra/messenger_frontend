@@ -1,0 +1,84 @@
+@import url("https://fonts.googleapis.com/css?family=Permanent+Marker");
+.form-error {
+  margin-left: 1vw;
+  color: red;
+}
+.container {
+	padding-right: 15px;
+	padding-left: 15px;
+	margin-right: 20vw;
+	margin-left: 20vw;
+	margin-top: 5vh;
+}
+.container-fluid {
+  	width: 100%;
+}
+.btn{
+	padding: 10px;
+	border: 1px solid black;
+	border-radius: 5px;
+	text-decoration: none;
+	font-size: 1rem;
+	color: black;
+	font-family: "Poppins";
+}
+.btn-hover:hover{
+	box-shadow: 5px 2px 8px;
+	opacity: .7;
+}
+.btn-danger{background-color: #E71C23; color: #FFF;}
+.btn-success{background-color: #6AB04A; color: #FFF;}
+.btn-warning{background-color: #FFF222; color: #000;}
+
+.bg-dark, .btn-dark{
+	background-color: #1c1e1f !important;
+	color: #FFF !important;
+}
+
+.box{
+	padding: 10px;
+	border: 1px solid #999;
+	border-radius: 5px;
+	width: -webkit-fill-available;
+}
+
+.box-image img, .box-image{
+	width: 100%;
+}
+.box-title, .heading-title{
+	font-weight: bold;
+	text-align: center;
+	font-family: "Montserrat";
+	padding: 2px 5px;
+	border-bottom: 0.5px solid #e6e6e6; 
+}
+
+.box-text{
+	font-family: "Roboto Condensed";
+}
+
+.box-shadow{
+	box-shadow: 3px 5px 11px;
+}
+
+.form-label, .text-label{
+	font-family: "Poppins", "Arial";
+	margin: 10px 0;
+}
+
+.form-group{
+	margin: 16px 14px;
+}
+
+.form-control{
+	color: black;
+	border: 1px solid #bfbfbf;
+	width: -webkit-fill-available;
+	border-radius: 5px;
+	padding: 8px;
+
+}
+.form-hover:hover{
+	opacity: .7;
+	box-shadow: 2px 2px 3px;
+}
