@@ -1,0 +1,7 @@
+.login-redirect{
+    display : grid;
+    place-items : center;
+}
+.content{
+    padding: 20px;
+}

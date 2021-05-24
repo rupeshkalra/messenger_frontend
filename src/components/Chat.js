@@ -7,10 +7,10 @@ import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
 import MicIcon from "@material-ui/icons/Mic";
 const io = require("socket.io-client");
 
-function Chat(){
+function Chat({history}){
     
     const {user}=useContext(UserContext);
-    
+    console.log(user);
 
     // console.log("user "+user);
 
@@ -37,13 +37,12 @@ function Chat(){
     }
 
     return(
-        
         <div className="chat">
             <div className="chat__header">
                 <Avatar />
 
                 <div className="chat__headerInfo">
-                    <h3>{user.name}</h3>
+                    <h3>chatname</h3>
                     <p>Last seen at...</p>
                 </div>
 

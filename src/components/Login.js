@@ -7,21 +7,11 @@ import { UserContext } from "../UserContext";
 
 const Login = ({history}) => {
     const {user,setUser}=useContext(UserContext);
-
+    
     const [inputEmail, setInputEmail] = useState('');
     const [inputPassword, setInputPassword] = useState('');
     const [error, setError] = useState('');
 
-    // useEffect(() => {
-    //     const token = new Cookies().get('token');
-    //     getUserByToken(token).then(res => {
-    //         if(res && !res.status){
-    //             const token = new Cookies();
-    //             token.set('token', res.token, {path: '/', maxAge:604800 })
-    //             window.location = "/";
-    //         }
-    //     })
-    // }, [])
 
     const Submit = (e) => {
         e.preventDefault();
@@ -29,9 +19,6 @@ const Login = ({history}) => {
         Axios.post(`http://localhost:8000/users/login`, {email: inputEmail, password: inputPassword})
         .then((res)=> {
             setUser(res.data.user);      
-            localStorage.setItem('Name', res.data.user.name);
-            localStorage.setItem('email', res.data.user.email);
-            localStorage.setItem('id', res.data.user._id);
             const token = new Cookies();
             token.set('token', res.data.token, {path: '/', maxAge:604800 })
             history.push('/');
@@ -42,7 +29,7 @@ const Login = ({history}) => {
     return(
         <div className="container">
             <form className="margin box box-shadow text-dark" onSubmit={Submit}>
-                <h1 className="box-title">{user.name} </h1>
+                <h1 className="box-title">Login </h1>
                 <h4 className="form-error">{error}</h4>
                 <div className="form-group">
                     <p className="form-label">Email:</p>

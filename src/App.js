@@ -7,7 +7,7 @@ import Register from "./components/Register";
 import {UserContext} from './UserContext';
 
 function App () {
-    const [user,setUser]=useState({name:''});
+    const [user,setUser]=useState(null);
     
         return (
         <UserContext.Provider value={{user,setUser}}>
