@@ -9,7 +9,7 @@ function Home({history}) {
   
   const {user,setUser}=useContext(UserContext);
   
-  return user==null ? 
+  return user.user==null ? 
   <div className="login-redirect">
     <div className="content">
       <h1>Login Please</h1>

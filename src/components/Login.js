@@ -18,7 +18,8 @@ const Login = ({history}) => {
 
         Axios.post(`http://localhost:8000/users/login`, {email: inputEmail, password: inputPassword})
         .then((res)=> {
-            setUser(res.data.user);      
+            setUser({...user,user:res.data.user});
+            console.log(user);      
             const token = new Cookies();
             token.set('token', res.data.token, {path: '/', maxAge:604800 })
             history.push('/');

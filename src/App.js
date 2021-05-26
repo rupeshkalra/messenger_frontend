@@ -7,8 +7,8 @@ import Register from "./components/Register";
 import {UserContext} from './UserContext';
 
 function App () {
-    const [user,setUser]=useState(null);
-    
+    const [user,setUser]=useState({user:null,chat:null});
+
         return (
         <UserContext.Provider value={{user,setUser}}>
             <Router>

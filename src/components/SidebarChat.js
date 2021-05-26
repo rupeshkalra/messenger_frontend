@@ -6,15 +6,11 @@ import { UserContext } from "../UserContext";
 
 function SidebarChat({flip}) {
   const [rooms, setRooms] = useState([]);
-
-
-  const { user } = useContext(UserContext);
   
-  function chatclick(_id){
-    
-  }
+  const { user,setUser } = useContext(UserContext);
+  
   useEffect(() => {
-    Axios.post(`http://localhost:8000/group/getrooms`, { email: user.email })
+    Axios.post(`http://localhost:8000/group/getrooms`, { email: user.user.email })
       .then((res) => {
         console.log(res.data);
         setRooms(res.data.userchats);
@@ -24,11 +20,10 @@ function SidebarChat({flip}) {
       });
   }, [flip]);
 
-  // console.log(rooms);
 
   return rooms.map((chatname) => {
     return (
-      <div className="sidebarChat" key={chatname._id} onClick={chatclick(chatname._id)}>
+      <div className="sidebarChat" key={chatname._id} onClick={()=>{setUser({...user,chat:chatname._id})}}>
         <div className="sidebar__component">
           <Avatar />
           <div className="sidebarChat__info">

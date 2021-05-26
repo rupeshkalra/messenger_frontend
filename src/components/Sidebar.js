@@ -11,8 +11,8 @@ import { UserContext } from "../UserContext";
 function Sidebar() {
   const [flip, setFlip] = useState(true);
   const { user, setUser } = useContext(UserContext);
-  const username = user.name;
-  const useremail = user.email;
+  const username = user.user.name;
+  const useremail = user.user.email;
 
   function create() {
     const roomname = prompt("Please Enter Name for Chat");
@@ -26,7 +26,7 @@ function Sidebar() {
         console.log(res);
         setFlip(!flip);
       })
-      .catch(() => alert("Error !"));
+      .catch(() => alert("Try different name"));
   }
 
   return (

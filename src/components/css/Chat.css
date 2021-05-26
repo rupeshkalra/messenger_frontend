@@ -27,7 +27,7 @@
 
 .chat__body {
     flex: 1;
-    background-color:gray;
+    background-color:rgb(135, 182, 160);
     background-repeat: repeat;
     background-position: center;
     padding : 30px;
@@ -57,7 +57,7 @@
 .chat__name {
     position: absolute;
     top: -15px;
-    font-weight: 800;
+    font-weight: 700;
     font-size: xx-small;
 }
 
