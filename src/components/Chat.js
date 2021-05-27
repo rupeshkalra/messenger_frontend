@@ -6,39 +6,60 @@ import { AttachFile, MoreVert, SearchOutlined } from "@material-ui/icons";
 import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
 import MicIcon from "@material-ui/icons/Mic";
 import Axios from "axios";
-const io = require("socket.io-client");
 
-function Chat({ history }) {
-  const { user ,setUser} = useContext(UserContext);
+
+function Chat({socket}) {
+
+  const { user } = useContext(UserContext);
+
   const [chatdata,setChatdata]=useState(null);
 
-  const socket = io("http://localhost:8000");
+  
+  useEffect(() => {
+    
+    const handler=message=>{
+      console.log(message);
+      
+      console.log(user.chat);
+      Axios.post(`http://localhost:8000/group/getchatdetails`, {
+        chatid: user.chat,
+      })
+        .then((res) => {
+          console.log(res.data);
+          setChatdata(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+  
+    }
+    socket.on('message',handler);
+    return () => {
+      socket.off('message', handler);
+   };
+  }, [user]);
 
-  socket.on("connect", () => {
-    console.log(socket.id);
-  });
 
   const [input, setInput] = useState("");
  
-  useEffect(async () => {
-    await Axios.post(`http://localhost:8000/group/getchatdetails`, {
-      chatid: user.chat,
-    })
-      .then((res) => {
-        console.log(res.data);
-        setChatdata(res.data);
+  useEffect(() => {
+    if(user.chat!=null){  
+      Axios.post(`http://localhost:8000/group/getchatdetails`, {
+        chatid: user.chat,
       })
-      .catch((err) => {
-        console.log(err);
-      });
+        .then((res) => {
+          console.log(res.data);
+          setChatdata(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      }
   }, [user.chat]);
 
 
   const sendMessage = async (e) => {
     e.preventDefault();
-
-    console.log(input);
-    socket.emit("chatMessage", input);
 
     setInput("");
 
@@ -48,23 +69,15 @@ function Chat({ history }) {
       message: input,
       sendername: user.user.name,
     })
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
 
-    Axios.post(`http://localhost:8000/group/getchatdetails`, {
+    let res2= await Axios.post(`http://localhost:8000/group/getchatdetails`, {
       chatid: user.chat,
     })
-      .then((res) => {
-        console.log(res.data);
-        setChatdata(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    setChatdata(res2.data);
+    
+    console.log("------");
+    socket.emit("chatMessage", input);
+
   };
 
   return user.chat==null ? 
@@ -111,7 +124,7 @@ function Chat({ history }) {
         
         {   chatdata==null ? <p></p> :
             chatdata.userchats.map(message => (
-            <p className={`chat__message ${ message.sender == user.user._id && 'chat__sent'}`}>
+            <p key={message._id} className={`chat__message ${ message.sender === user.user._id && 'chat__sent'}`}>
                 <span className="chat__name">{message.sendername}</span>
                 {message.message}
                 <span className="chat__timestamp">time</span>

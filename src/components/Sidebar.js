@@ -3,16 +3,18 @@ import "./css/Sidebar.css";
 import { Avatar, IconButton } from "@material-ui/core";
 import ChatIcon from "@material-ui/icons/Chat";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
-import { SearchOutlined, SentimentSatisfiedAltSharp } from "@material-ui/icons";
+import { SearchOutlined } from "@material-ui/icons";
 import SidebarChat from "./SidebarChat";
 import Axios from "axios";
 import { UserContext } from "../UserContext";
 
 function Sidebar() {
   const [flip, setFlip] = useState(true);
-  const { user, setUser } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const username = user.user.name;
   const useremail = user.user.email;
+
+  const [search_input,setSearch_input] =useState('');
 
   function create() {
     const roomname = prompt("Please Enter Name for Chat");
@@ -27,6 +29,19 @@ function Sidebar() {
         setFlip(!flip);
       })
       .catch(() => alert("Try different name"));
+  }
+
+  function searchchat(){
+      Axios.post(`http://localhost:8000/group/searchchat`, {
+        user: username,
+        email: useremail,
+        name:search_input
+      })
+        .then((res) => {
+          setFlip(!flip);
+          console.log(res);
+        })
+        .catch(() => alert("Try different name"));
   }
 
   return (
@@ -48,8 +63,9 @@ function Sidebar() {
 
       <div className="sidebar__search">
         <div className="sidebar__searchContainer">
-          <SearchOutlined />
-          <input placeholder="Search or start new chat" type="text" />
+          <SearchOutlined onClick={searchchat}/>
+          <input placeholder="Search or start new chat" type="text" value={search_input}
+            onChange={(e) => setSearch_input(e.target.value)}/>
         </div>
       </div>
 
