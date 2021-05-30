@@ -13,7 +13,7 @@ function Chat({socket}) {
   const { user } = useContext(UserContext);
 
   const [chatdata,setChatdata]=useState(null);
-
+  
   
   useEffect(() => {
     
@@ -89,7 +89,7 @@ function Chat({socket}) {
           ":"+date.getMinutes();
   }
 
-  return user.chat==null ? 
+  return chatdata==null ? 
     <div className="welcome">
         <div className="start-chat">
         <h1>Start a conversation</h1>
@@ -102,7 +102,7 @@ function Chat({socket}) {
 
         <div className="chat__headerInfo">
           <h3>{chatdata==null ? <p></p> : chatdata.chatname}</h3>
-          <p>Last seen at...</p>
+          <p>{chatdata.userchats.length===0 ? " " : `Last seen at ${date(chatdata.userchats[chatdata.userchats.length-1].createdAt)}`}</p>
         </div>
 
         <div className="chat__headerRight">
@@ -119,22 +119,11 @@ function Chat({socket}) {
       </div>
 
       <div className="chat__body">
-        <p className="chat__message chat__sent">
-          <span className="chat__name">Name</span>
-          This is a message
-          <span className="chat__timestamp">{new Date().toUTCString()}</span>
-        </p>
 
-        <p className="chat__message">
-          <span className="chat__name">Name</span>
-          This is a message
-          <span className="chat__timestamp">{new Date().toUTCString()}</span>
-        </p>
-        
         {   chatdata==null ? <p></p> :
             chatdata.userchats.map(message => (
             <p key={message._id} className={`chat__message ${ message.sender === user.user._id && 'chat__sent'}`}>
-                <span className="chat__name">{message.sendername}</span>
+                <span className="chat__name">{user.user.name===message.sendername ? "you" :message.sendername}</span>
                 {message.message}
                 <span className="chat__timestamp">{date(message.createdAt)}</span>
             </p>
