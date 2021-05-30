@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import Axios from "axios";
 import Cookies from "universal-cookie";
 import { NavLink } from "react-router-dom";
-import './css/Login.css';
 import { UserContext } from "../UserContext";
 
 const Login = ({history}) => {

@@ -74,16 +74,25 @@ function Chat({socket}) {
       chatid: user.chat,
     })
     setChatdata(res2.data);
-    
-    console.log("------");
+  
     socket.emit("chatMessage", input);
 
   };
 
+  function date(d){
+    let date=new Date(d);
+
+    return date.getDate()+
+          "/"+(date.getMonth()+1)+
+          "/"+date.getFullYear()+
+          " "+date.getHours()+
+          ":"+date.getMinutes();
+  }
+
   return user.chat==null ? 
-    <div className="login-redirect">
-        <div className="content">
-        <h1>Welcome Start a conversation</h1>
+    <div className="welcome">
+        <div className="start-chat">
+        <h1>Start a conversation</h1>
         </div>
     </div>
     :
@@ -127,8 +136,7 @@ function Chat({socket}) {
             <p key={message._id} className={`chat__message ${ message.sender === user.user._id && 'chat__sent'}`}>
                 <span className="chat__name">{message.sendername}</span>
                 {message.message}
-                <span className="chat__timestamp">time</span>
-                {/* {new Date(message.createdAt.toDate()).toUTCString()} */}
+                <span className="chat__timestamp">{date(message.createdAt)}</span>
             </p>
         ))}
       </div>
