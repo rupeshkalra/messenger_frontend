@@ -63,9 +63,9 @@ function Sidebar() {
 
       <div className="sidebar__search">
         <div className="sidebar__searchContainer">
-          <SearchOutlined onClick={searchchat}/>
-          <input placeholder="Search or start new chat" type="text" value={search_input}
+          <input placeholder="Search a chat" type="text" value={search_input}
             onChange={(e) => setSearch_input(e.target.value)}/>
+            <SearchOutlined onClick={searchchat}/>
         </div>
       </div>
 

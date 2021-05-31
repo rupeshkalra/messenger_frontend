@@ -2,15 +2,13 @@ import { UserContext } from "../UserContext";
 import React, { useState, useContext, useEffect } from "react";
 import "./css/Chat.css";
 import { Avatar, IconButton } from "@material-ui/core";
-import { AttachFile, MoreVert, SearchOutlined } from "@material-ui/icons";
-import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
-import MicIcon from "@material-ui/icons/Mic";
+import { MoreVert } from "@material-ui/icons";
 import Axios from "axios";
 
 
 function Chat({socket}) {
 
-  const { user } = useContext(UserContext);
+  const { user ,setUser} = useContext(UserContext);
 
   const [chatdata,setChatdata]=useState(null);
   
@@ -89,6 +87,13 @@ function Chat({socket}) {
           ":"+date.getMinutes();
   }
 
+  // async function del({email,chat}){
+  //   setUser({...user,chat:null});
+  //   const remove = await Axios.delete(`http://localhost:8000/group/delete`,{ data: {mail:email,chatid:chat } });
+    
+  //   console.log(remove);
+  // }
+
   return chatdata==null ? 
     <div className="welcome">
         <div className="start-chat">
@@ -106,13 +111,7 @@ function Chat({socket}) {
         </div>
 
         <div className="chat__headerRight">
-          <IconButton>
-            <SearchOutlined />
-          </IconButton>
-          <IconButton>
-            <AttachFile />
-          </IconButton>
-          <IconButton>
+         <IconButton /* onClick={del(user.user.email,user.chat)}*/ >
             <MoreVert />
           </IconButton>
         </div>
@@ -131,7 +130,6 @@ function Chat({socket}) {
       </div>
 
       <div className="chat__footer">
-        <InsertEmoticonIcon />
         <form>
           <input
             value={input}
@@ -143,7 +141,6 @@ function Chat({socket}) {
             Send a message
           </button>
         </form>
-        <MicIcon />
       </div>
     </div>
   );

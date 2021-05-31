@@ -28,7 +28,7 @@ function SidebarChat({flip}) {
           <Avatar />
           <div className="sidebarChat__info">
             <h2>{chatname.name}</h2>
-            <p>This is the last message</p>
+            {/* <p>This is the last message</p> */}
           </div>
         </div>
       </div>
