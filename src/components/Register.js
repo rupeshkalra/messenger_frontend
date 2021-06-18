@@ -10,11 +10,13 @@ const Register = () => {
   const [inputUsername, setInputUsername] = useState("");
   const [error, setError] = useState("");
 
+  const API = process.env.REACT_APP_BACKEND;
+  
   const Submit = async (e) => {
     e.preventDefault();
 
     // if(error === ""){
-    await Axios.post(`http://localhost:8000/users/register`, {
+    await Axios.post(`${API}/users/register`, {
       email: inputEmail,
       name: inputUsername,
       password: inputPassword,

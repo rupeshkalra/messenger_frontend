@@ -11,11 +11,12 @@ const Login = ({history}) => {
     const [inputPassword, setInputPassword] = useState('');
     const [error, setError] = useState('');
 
-
+    const API = process.env.REACT_APP_BACKEND;
+  
     const Submit = (e) => {
         e.preventDefault();
 
-        Axios.post(`http://localhost:8000/users/login`, {email: inputEmail, password: inputPassword})
+        Axios.post(`${API}/users/login`, {email: inputEmail, password: inputPassword})
         .then((res)=> {
             setUser({...user,user:res.data.user});
             console.log(user);      

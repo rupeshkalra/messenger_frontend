@@ -9,8 +9,10 @@ function SidebarChat({flip}) {
   
   const { user,setUser } = useContext(UserContext);
   
+  const API = process.env.REACT_APP_BACKEND;
+  
   useEffect(() => {
-    Axios.post(`http://localhost:8000/group/getrooms`, { email: user.user.email })
+    Axios.post(`${API}/group/getrooms`, { email: user.user.email })
       .then((res) => {
         console.log(res.data);
         setRooms(res.data.userchats);

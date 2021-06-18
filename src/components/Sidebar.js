@@ -13,13 +13,14 @@ function Sidebar() {
   const { user } = useContext(UserContext);
   const username = user.user.name;
   const useremail = user.user.email;
-
+  const API = process.env.REACT_APP_BACKEND;
+  
   const [search_input,setSearch_input] =useState('');
 
   function create() {
     const roomname = prompt("Please Enter Name for Chat");
 
-    Axios.post(`http://localhost:8000/group/create`, {
+    Axios.post(`${API}/group/create`, {
       user: username,
       name: roomname,
       email: useremail,
@@ -32,7 +33,7 @@ function Sidebar() {
   }
 
   function searchchat(){
-      Axios.post(`http://localhost:8000/group/searchchat`, {
+      Axios.post(`${API}/group/searchchat`, {
         user: username,
         email: useremail,
         name:search_input

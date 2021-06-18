@@ -5,9 +5,10 @@ import Sidebar from './Sidebar';
 import Chat from './Chat';
 import { UserContext } from "../UserContext";
 const io = require("socket.io-client");
-
+const API = process.env.REACT_APP_BACKEND;
+  
 function Home({history}) {
-  const socket = io("http://localhost:8000");
+  const socket = io(API);
   socket.on("connect", () => {
     console.log(socket.id);
   });

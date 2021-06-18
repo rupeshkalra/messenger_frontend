@@ -8,10 +8,10 @@ import Axios from "axios";
 
 function Chat({socket}) {
 
-  const { user ,setUser} = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
   const [chatdata,setChatdata]=useState(null);
-  
+  const API = process.env.REACT_APP_BACKEND;
   
   useEffect(() => {
     
@@ -19,7 +19,7 @@ function Chat({socket}) {
       console.log(message);
       
       console.log(user.chat);
-      Axios.post(`http://localhost:8000/group/getchatdetails`, {
+      Axios.post(`${API}/group/getchatdetails`, {
         chatid: user.chat,
       })
         .then((res) => {
